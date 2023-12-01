@@ -4,8 +4,11 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
+import androidx.compose.foundation.horizontalScroll
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -37,7 +40,7 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colorScheme.background
                 ) {
 //                    Greeting("Android", Modifier.height(100.dp))
-                    MyBox()
+                    MyRow()
                 }
             }
         }
@@ -83,14 +86,77 @@ fun GreetingPreview() {
 @Composable
 fun MyPreview() {
     LayoutsAppTheme {
-        MyBox()
+        MyRow()
     }
+}
+
+
+
+@Composable
+fun MyColumn() {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(20.dp)
+            .verticalScroll(rememberScrollState())
+            .horizontalScroll(rememberScrollState()),
+        //con row arrangement y aligment serían al revés
+        verticalArrangement = Arrangement.SpaceEvenly,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        My2Text()
+        My2Text()
+//        My2Text()
+//        My2Text()
+//        My2Text()
+//        My2Text()
+//        My2Text()
+    }
+}
+
+@Composable
+fun MyRow() {
+    Row(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(20.dp)
+            .verticalScroll(rememberScrollState())
+            .horizontalScroll(rememberScrollState()),
+        //con row arrangement y aligment serían al revés
+        horizontalArrangement = Arrangement.SpaceBetween,
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        My2Text()
+//        My2Text()
+//        My2Text()
+//        My2Text()
+//        My2Text()
+//        My2Text()
+//        My2Text()
+    }
+}
+
+@Composable
+fun My2Text(){
+    Text(
+        text = "Adios",
+        modifier = Modifier
+            .background(Color.Blue)
+            .padding(35.dp)
+    )
+    Text(
+        text = "Hola",
+        modifier = Modifier
+            .background(Color.Green)
+            .padding(30.dp)
+    )
 }
 
 @Composable
 fun MyBox() {
     Box(
-        modifier = Modifier.fillMaxSize(),
+        modifier = Modifier
+            .fillMaxSize(),
         contentAlignment = Alignment.CenterEnd
     ) {
         Box(
@@ -106,11 +172,20 @@ fun MyBox() {
     }
 }
 
-@Preview(showBackground = true)
 @Composable
-fun myNewBox(){
-    Box(modifier = Modifier.fillMaxSize()) {
-        Text(text = "Holita",
-            modifier = Modifier.background(Color.Green))
+fun myNewBox() {
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(Color.DarkGray)
+    ) {
+        Text(
+            text = "Adios Adios Adios Adios Adios Adios Adios ",
+            modifier = Modifier.background(Color.Blue)
+        )
+        Text(
+            text = "HolaVecinito",
+            modifier = Modifier.background(Color.Green)
+        )
     }
 }
