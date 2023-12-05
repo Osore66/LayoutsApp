@@ -9,6 +9,8 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -40,7 +42,7 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colorScheme.background
                 ) {
 //                    Greeting("Android", Modifier.height(100.dp))
-                    MyRow()
+                    MyComplexLayout()
                 }
             }
         }
@@ -86,10 +88,9 @@ fun GreetingPreview() {
 @Composable
 fun MyPreview() {
     LayoutsAppTheme {
-        MyRow()
+        MyComplexLayout()
     }
 }
-
 
 
 @Composable
@@ -137,7 +138,7 @@ fun MyRow() {
 }
 
 @Composable
-fun My2Text(){
+fun My2Text() {
     Text(
         text = "Adios",
         modifier = Modifier
@@ -189,3 +190,59 @@ fun myNewBox() {
         )
     }
 }
+
+@Composable
+fun MyComplexLayout() {
+    Column(modifier = Modifier.fillMaxSize().padding(horizontal = 25.dp)) {
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .weight(0.5f)
+                .background(Color.Cyan)
+        )
+        Spacer(modifier = Modifier.height(30.dp))
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .weight(1 / 3f)
+        ) {
+            Box(
+                modifier = Modifier
+                    .fillMaxHeight()
+                    .weight(1f)
+                    .background(Color.Red)
+            )
+            Spacer(modifier = Modifier.width(30.dp))
+            Box(
+                modifier = Modifier
+                    .fillMaxHeight()
+                    .weight(1f)
+                    .background(Color.Magenta),
+                contentAlignment = Alignment.Center
+            )
+            {
+                Text("Hola clase!")
+            }
+        }
+        MySpacerHeight(height = 400)
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .weight(1f)
+                .background(Color.Gray)
+        )
+    }
+}
+
+@Composable
+fun MySpacerHeight(height: Int) {
+    Spacer(modifier = Modifier.height(height.dp))
+}
+
+//    Esto no se puede hacer porqe el peso es un valor
+//    relativo al padre y no tenemos acceso a esa información
+
+//    @Composable
+//    fun MySpacerWeight(weight:Int) {
+//        Spacer(modifier = Modifier.weight(weight))
+//    }
